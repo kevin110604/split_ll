@@ -1,10 +1,10 @@
-#include "cirll.h"
+#include "dcirll.h"
 
 
-list_t *cirll_split(list_t **list)
+dcir_list_t *dcirll_split(dcir_list_t **list)
 {
-    list_t *right;
-    node *head, *tail, *p;
+    dcir_list_t *right;
+    dcir_node_t *head, *tail, *p, *q;
     head = (*list)->head;
     tail = (*list)->tail;
     if (list == NULL)
@@ -14,36 +14,36 @@ list_t *cirll_split(list_t **list)
     if (head->next == head)
         return NULL;
 
-    right = malloc(sizeof(list_t));
-    int count = 1;
-    for (p = head; p->next != head; p = p->next) {
-        count++;
-    }
-    if (count%2 == 0)
-        count = count/2;
-    else
-        count = count/2 + 1;
-
-    int i = 1;
-    for (p = head; i < count; p = p->next, i++) {
-        ;
+    right = malloc(sizeof(dcir_list_t));
+    p = head;
+    q = tail;
+    while (1) {
+        if (p->next == q)
+            break;
+        p = p->next;
+        if (p->next == q)
+            break;
+        q = q->prev;
     }
     (*list)->tail = p;
-    right->head = p->next;
+    p->next = head;
+    (*list)->head->prev = p;
+
+    right->head = q;
+    q->prev = tail;
     right->tail = tail;
-    right->tail->next = right->head;
-    (*list)->tail->next = (*list)->head;
+    tail->next = q;
 
     return right;
 }
 
 
-int cirll_insert_head(list_t **list, int x)
+int dcirll_insert_head(dcir_list_t **list, int x)
 {
     if (list == NULL)
         return -1;
-        
-    node *newnode = malloc(sizeof(node));
+
+    dcir_node_t *newnode = malloc(sizeof(dcir_node_t));
     if (newnode == NULL)
         return -1;
 
@@ -51,20 +51,23 @@ int cirll_insert_head(list_t **list, int x)
     
     if ((*list)->head == NULL) {
         newnode->next = newnode;
+        newnode->prev = newnode;
         (*list)->head = newnode;
         (*list)->tail = newnode;
         return 0;
     }
     
+    (*list)->head->prev = newnode;
     newnode->next = (*list)->head;
+    newnode->prev = (*list)->tail;
     (*list)->head = newnode;
     (*list)->tail->next = newnode;
     return 0;
 }
 
-void cirll_print(list_t *list)
+void dcirll_print(dcir_list_t *list)
 {
-    node *p;
+    dcir_node_t *p;
     if (list == NULL)
         return;
     if (list->head == NULL)
