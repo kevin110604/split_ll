@@ -18,5 +18,6 @@ typedef struct __dcir_list {
 dcir_list_t *dcirll_split(dcir_list_t **list);
 int dcirll_insert_head(dcir_list_t **list, int x);
 void dcirll_print(dcir_list_t *list);
+void dcirll_delete_list(dcir_list_t *list);
 
 #endif

@@ -74,3 +74,21 @@ void cirll_print(list_t *list)
         printf("%d ", p->val);
     printf("%d\n", p->val);
 }
+
+void cirll_delete_list(list_t *list)
+{
+    node *p, *tmp;
+    if (list == NULL)
+        return;
+    if (list->head == NULL) {
+        free(list);
+        return;
+    }
+    
+    for (p = list->head; p != list->tail; p = tmp) {
+        tmp = p->next;
+        free(p);
+    }
+    free(p);
+    free(list);
+}

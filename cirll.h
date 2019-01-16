@@ -17,5 +17,6 @@ typedef struct __list {
 list_t *cirll_split(list_t **list);
 int cirll_insert_head(list_t **list, int x);
 void cirll_print(list_t *list);
+void cirll_delete_list(list_t *list);
 
 #endif

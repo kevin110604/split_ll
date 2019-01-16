@@ -77,3 +77,21 @@ void dcirll_print(dcir_list_t *list)
         printf("%d ", p->val);
     printf("%d\n", p->val);
 }
+
+void dcirll_delete_list(dcir_list_t *list)
+{
+    dcir_node_t *p, *tmp;
+    if (list == NULL)
+        return;
+    if (list->head == NULL) {
+        free(list);
+        return;
+    }
+    
+    for (p = list->head; p != list->tail; p = tmp) {
+        tmp = p->next;
+        free(p);
+    }
+    free(p);
+    free(list);
+}
