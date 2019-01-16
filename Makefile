@@ -1,7 +1,7 @@
 
 EXEC = main
-SRC = main.c cirll.c
-OBJ = main.o cirll.o
+SRC = main.c cirll.c dcirll.c
+OBJ = main.o cirll.o dcirll.o
 
 CC = gcc
 CFLAGS = -std=c99
