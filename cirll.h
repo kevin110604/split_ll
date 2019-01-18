@@ -7,11 +7,11 @@
 typedef struct __node {
     int val;
     struct __node *next;
-} node;
+} node_t;
 
 typedef struct __list {
-    node *head;
-    node *tail;
+    node_t *head;
+    node_t *tail;
 } list_t;
 
 list_t *cirll_split(list_t **list);

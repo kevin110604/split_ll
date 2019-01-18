@@ -4,7 +4,7 @@
 list_t *cirll_split(list_t **list)
 {
     list_t *right;
-    node *head, *tail, *p;
+    node_t *head, *tail, *p;
     head = (*list)->head;
     tail = (*list)->tail;
     if (!list || !head || head->next == head)
@@ -37,7 +37,7 @@ int cirll_insert_head(list_t **list, int x)
     if (list == NULL)
         return -1;
         
-    node *newnode = malloc(sizeof(node));
+    node_t *newnode = malloc(sizeof(node_t));
     if (newnode == NULL)
         return -1;
 
@@ -58,7 +58,7 @@ int cirll_insert_head(list_t **list, int x)
 
 void cirll_print(list_t *list)
 {
-    node *p;
+    node_t *p;
     if (list == NULL)
         return;
     if (list->head == NULL)
@@ -71,7 +71,7 @@ void cirll_print(list_t *list)
 
 void cirll_delete_list(list_t *list)
 {
-    node *p, *tmp;
+    node_t *p, *tmp;
     if (list == NULL)
         return;
     if (list->head == NULL) {
