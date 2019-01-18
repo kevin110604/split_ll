@@ -4,31 +4,28 @@
 list_t *cirll_split(list_t **list)
 {
     list_t *right;
-    node_t *head, *tail, *p;
+    node_t *head, *tail, *p, *q;
     head = (*list)->head;
     tail = (*list)->tail;
     if (!list || !head || head->next == head)
         return NULL;
 
     right = malloc(sizeof(list_t));
-    int count = 1;
-    for (p = head; p->next != head; p = p->next) {
-        count++;
-    }
     
-    count = count % 2 ? count/2 + 1 : count/2;
+    p = q = head;
+    while (1) {
+        p = p->next->next;
+        q = q->next;
+        if (p == tail || p->next == tail) {
+            (*list)->tail = q;
+            right->head = q->next;
+            right->tail = tail;
+            right->tail->next = q->next;
+            q->next = head;
 
-    int i = 1;
-    for (p = head; i < count; p = p->next, i++) {
-        ;
+            return right;
+        }
     }
-    (*list)->tail = p;
-    right->head = p->next;
-    right->tail = tail;
-    right->tail->next = right->head;
-    (*list)->tail->next = (*list)->head;
-
-    return right;
 }
 
 
