@@ -7,11 +7,7 @@ list_t *cirll_split(list_t **list)
     node *head, *tail, *p;
     head = (*list)->head;
     tail = (*list)->tail;
-    if (list == NULL)
-        return NULL;
-    if (head == NULL)
-        return NULL;
-    if (head->next == head)
+    if (!list || !head || head->next == head)
         return NULL;
 
     right = malloc(sizeof(list_t));
@@ -19,10 +15,8 @@ list_t *cirll_split(list_t **list)
     for (p = head; p->next != head; p = p->next) {
         count++;
     }
-    if (count%2 == 0)
-        count = count/2;
-    else
-        count = count/2 + 1;
+    
+    count = count % 2 ? count/2 + 1 : count/2;
 
     int i = 1;
     for (p = head; i < count; p = p->next, i++) {

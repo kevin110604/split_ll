@@ -7,11 +7,7 @@ dcir_list_t *dcirll_split(dcir_list_t **list)
     dcir_node_t *head, *tail, *p, *q;
     head = (*list)->head;
     tail = (*list)->tail;
-    if (list == NULL)
-        return NULL;
-    if (head == NULL)
-        return NULL;
-    if (head->next == head)
+    if (!list || !head || head->next == head)
         return NULL;
 
     right = malloc(sizeof(dcir_list_t));
